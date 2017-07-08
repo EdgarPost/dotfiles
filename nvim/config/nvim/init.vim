@@ -6,26 +6,44 @@ scriptencoding utf-8
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'wikitopian/hardmode'
+Plug 'easymotion/vim-easymotion'
+Plug 'mhinz/vim-startify'
 Plug 'jacoborus/tender.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-syntastic/syntastic'
 Plug 'shawncplus/phpcomplete.vim'
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'tobyS/vmustache'
+Plug 'tobyS/pdv'
 " Plug 'stephpy/vim-php-cs-fixer'
 Plug 'sbdchd/neoformat'
 Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'roxma/nvim-completion-manager'
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+" Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script  arse-stubs'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
+" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composeu install' }
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+let g:startify_custom_header = [
+            \ '  _____     _____   _             _____     ',
+            \ ' |     |___|   __|_| |___ ___ ___|  _  |    ',
+            \ ' | | | |  _|   __| . | . | . |  _|   __|    ',
+            \ ' |_|_|_|_| |_____|___|_  |__,|_| |__|       ',
+            \ '                     |___|                  ',
+            \ ]
+
 
 " General config
 syntax enable
@@ -40,16 +58,27 @@ set number
 set relativenumber
 set cursorline
 set cursorcolumn
+set scrolloff=10
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set incsearch
+set hlsearch
+
+set undofile
+set undodir="$HOME/.VIM_UNDO_FILES"
 
 " Don't use those arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+" noremap H 0
+" noremap L $
+" noremap J 5j
+" noremap K 5k
+noremap ; :
 
 map <leader>vc :so ~/.config/nvim/init.vim<CR>
 
@@ -70,11 +99,14 @@ map <leader>wsv :vsplit<CR>
 " map <leader>pur :UpdateRemotePlugins<CR>
 
 let g:airline_theme='tender'
+let g:airline_powerline_fonts = 1
 
 " Deoplete config
 let g:deoplete#enable_at_startup = 1
 " let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 " let g:deoplete#ignore_sources.php = ['omni']
+
+let g:pdv_template_dir = $HOME ."/.config/nvim/plugged/pdv/templates_snip"
 
 augroup fmt
   autocmd!
