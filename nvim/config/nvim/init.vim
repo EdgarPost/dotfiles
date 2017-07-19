@@ -1,15 +1,13 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" let g:python3_host_prog = '/usr/local/bin/python3'
-" let g:loaded_python_provider = 1
-
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'wikitopian/hardmode'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-startify'
 Plug 'jacoborus/tender.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
@@ -17,115 +15,99 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'mbbill/undotree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-syntastic/syntastic'
-Plug 'shawncplus/phpcomplete.vim'
 Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
-" Plug 'stephpy/vim-php-cs-fixer'
+Plug 'stephpy/vim-php-cs-fixer'
 Plug 'sbdchd/neoformat'
 Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script  arse-stubs'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-completion-manager'
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composeu install' }
-" Plug 'ryanoasis/vim-devicons'
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 
 call plug#end()
 
-let g:startify_custom_header = [
-            \ '  _____     _____   _             _____     ',
-            \ ' |     |___|   __|_| |___ ___ ___|  _  |    ',
-            \ ' | | | |  _|   __| . | . | . |  _|   __|    ',
-            \ ' |_|_|_|_| |_____|___|_  |__,|_| |__|       ',
-            \ '                     |___|                  ',
-            \ ]
-
+let g:startify_custom_header = ['']
 
 " General config
 syntax enable
 :let mapleader = "\<space>"
 set background=dark
-if (has("termguicolors"))
-     set termguicolors
- endif
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme tender
+colorscheme solarized
+set lazyredraw
 set number
 set relativenumber
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 set scrolloff=10
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set backspace=indent,eol,start
+set nowrap
+set colorcolumn=120
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
-set undofile
-set undodir="$HOME/.VIM_UNDO_FILES"
-
-" Don't use those arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-" noremap H 0
-" noremap L $
-" noremap J 5j
-" noremap K 5k
 noremap ; :
+" Open NeoVim settings macOS style (<leader> + ,)
+noremap <leader>, :tabnew ~/.config/nvim/init.vim<CR>
+noremap <leader>,r :so ~/.config/nvim/init.vim<CR>
 
-map <leader>vc :so ~/.config/nvim/init.vim<CR>
+noremap <leader>hh :Startify<CR>
 
-map <leader>ft :NERDTreeToggle<CR>
+noremap <leader>ft :NERDTreeToggle<CR>
+noremap <leader>fo :FZF<CR>
+noremap <leader>fh :History<CR>
+noremap <leader>fu :UndotreeToggle<CR>
 
-map <leader>sf :FZF<CR>
-map <leader>sh :History<CR>
+noremap <leader>tt :tabnew<CR>
+noremap <leader>tn :tabNext<CR>
 
-map <leader>bw :w<CR> " Write current buffer
-map <leader>bq :q<CR> " Quit current buffer
+tnoremap <Leader><ESC> <C-\><C-n>
+:au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+ 
+set splitbelow
+set splitright
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
-map <leader>w <C-W>
-map <leader>ws :split
-map <leader>wsv :vsplit<CR>
+" autocmd BufWritePre * Neoformat
 
-" map <leader>pi :PlugInstall<CR>
-" map <leader>pc :PlugClean<CR>
-" map <leader>pur :UpdateRemotePlugins<CR>
-
-let g:airline_theme='tender'
+let g:airline_solarized_bg='dark'
+let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 
 " Deoplete config
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-" let g:deoplete#ignore_sources.php = ['omni']
-
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
+ 
 let g:pdv_template_dir = $HOME ."/.config/nvim/plugged/pdv/templates_snip"
 
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" Persist until infinity
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
 
 " Syntastic config
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-" LSP config
-" Required for operations modifying multiple buffers like rename.
-" set hidden
-" autocmd FileType php LanguageClientStart
-
+ 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
