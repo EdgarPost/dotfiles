@@ -1,9 +1,10 @@
 # Install Neovim
 dir=$HOME/.config/nvim
+echo $dir
 if ! [ -d file ] ; then
-    mkdir $HOME/.config/nvim
+    mkdir $dir
 fi
-cp -i ./nvim/config/nvim/init.vim $HOME/.config/nvim
+cp -i ./nvim/config/nvim/init.vim $dir
 nvim +PlugInstall +UpdateRemotePlugins +qa
 
 # Tmux
