@@ -4,6 +4,7 @@ scriptencoding utf-8
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'wikitopian/hardmode'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-startify'
 Plug 'jacoborus/tender.vim'
@@ -60,11 +61,14 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 noremap ; :
 " Open NeoVim settings macOS style (<leader> + ,)
 noremap <leader>, :tabnew ~/.config/nvim/init.vim<CR>
-noremap <leader>,r :so ~/.config/nvim/init.vim<CR>
+" noremap <leader>,r :so ~/.config/nvim/init.vim<CR>
 
 noremap <leader>hh :Startify<CR>
 
-noremap <leader>ft :NERDTreeToggle<CR>
+noremap <leader>nt :NERDTreeFocus<CR>
+noremap <leader>nc :NERDTreeClose<CR>
+noremap <leader>ns :NERDTreeFind<CR>
+
 noremap <leader>fo :FZF<CR>
 noremap <leader>fh :History<CR>
 noremap <leader>fu :UndotreeToggle<CR>
@@ -72,17 +76,24 @@ noremap <leader>fu :UndotreeToggle<CR>
 noremap <leader>tt :tabnew<CR>
 noremap <leader>tn :tabNext<CR>
 
-tnoremap <Leader><ESC> <C-\><C-n>
+tnoremap <Leader><Leader> <C-\><C-n>
 :au BufEnter * if &buftype == 'terminal' | :startinsert | endif
  
 set splitbelow
 set splitright
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" noremap <C-h> <C-w>h
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-l> <C-w>l
 
 " autocmd BufWritePre * Neoformat
+
+" let g:neoformat_php_php_cs_fixer = {
+"             \ 'exe': 'php-cs-fixer',
+"             \ 'args': ['--rules=@Symfony'],
+"             \ }
+" 
+" let g:neoformat_enabled_php = ['php_cs_fixer']
 
 let g:airline_solarized_bg='dark'
 let g:airline_theme='solarized'
