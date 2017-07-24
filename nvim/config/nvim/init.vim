@@ -5,34 +5,50 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'wikitopian/hardmode'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-startify'
-Plug 'jacoborus/tender.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 Plug 'mbbill/undotree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-syntastic/syntastic'
+Plug '2072/vim-syntax-for-PHP'
 Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'sbdchd/neoformat'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'EdgarPost/vim-gutentags'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 
 call plug#end()
 
 let g:startify_custom_header = ['']
+let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_change_to_dir = 0
+let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'} ]
+let g:startify_list_order = [
+            \ ['   Recent files'],
+            \ 'dir',
+            \ ['   Sessions'],
+            \ 'sessions',
+            \ ['   Bookmarks:'],
+            \ 'bookmarks',
+            \ ['   Commands:'],
+            \ 'commands',
+            \ ]
 
 " General config
 syntax enable
@@ -58,6 +74,8 @@ set ignorecase
 set smartcase
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 noremap ; :
 " Open NeoVim settings macOS style (<leader> + ,)
 noremap <leader>, :tabnew ~/.config/nvim/init.vim<CR>
@@ -81,23 +99,27 @@ tnoremap <Leader><Leader> <C-\><C-n>
  
 set splitbelow
 set splitright
-" noremap <C-h> <C-w>h
-" noremap <C-j> <C-w>j
-" noremap <C-k> <C-w>k
-" noremap <C-l> <C-w>l
 
-" autocmd BufWritePre * Neoformat
+autocmd BufWritePre * Neoformat
 
-" let g:neoformat_php_php_cs_fixer = {
-"             \ 'exe': 'php-cs-fixer',
-"             \ 'args': ['--rules=@Symfony'],
-"             \ }
-" 
-" let g:neoformat_enabled_php = ['php_cs_fixer']
+let g:neoformat_php_php_cs_fixer = {
+           \ 'exe': 'php-cs-fixer',
+           \ 'args': ['fix', '-q', '--rules=@Symfony'],
+           \ 'replace': 1,
+           \ }
+
+let g:neoformat_enabled_php = ['php_cs_fixer']
 
 let g:airline_solarized_bg='dark'
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
+
+let g:gutentags_cache_dir = '~/.config/nvim/gutentags'
+let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
+                            \ '*.phar', '*.ini', '*.rst', '*.md',
+                            \ '*vendor/*/test*', '*vendor/*/Test*',
+                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+                            \ '*var/cache*', '*var/log*']
 
 " Deoplete config
 let g:deoplete#enable_at_startup = 1
