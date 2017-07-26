@@ -1,10 +1,10 @@
 [user]
 	name = Edgar Post
-	email = edgar@mediamonks.com
+	email = info@edgarpost.com
 [core]
 	autocrlf = input
 	ignorecase = false
-	excludesfile = /Users/edgar/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
 [credential]
