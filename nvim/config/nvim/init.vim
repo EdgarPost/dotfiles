@@ -22,6 +22,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'mbbill/undotree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-syntastic/syntastic'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Quramy/tsuquyomi'
 Plug '2072/vim-syntax-for-PHP'
 Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'tobyS/vmustache'
@@ -55,11 +57,11 @@ syntax enable
 :let mapleader = "\<space>"
 set background=dark
 colorscheme solarized
-set lazyredraw
+"set lazyredraw
 set number
 set relativenumber
 set cursorline
-" set cursorcolumn
+set cursorcolumn
 set scrolloff=10
 set tabstop=4
 set shiftwidth=4
@@ -100,7 +102,7 @@ tnoremap <Leader><Leader> <C-\><C-n>
 set splitbelow
 set splitright
 
-autocmd BufWritePre * Neoformat
+"autocmd BufWritePre * Neoformat
 
 let g:neoformat_php_php_cs_fixer = {
            \ 'exe': 'php-cs-fixer',
@@ -127,6 +129,8 @@ let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
  
 let g:pdv_template_dir = $HOME ."/.config/nvim/plugged/pdv/templates_snip"
+
+let g:tsuquyomi_tsserver_path = './tools/build/node_modules/typescript/bin/tsserver'
 
 " Persist until infinity
 if has("persistent_undo")
