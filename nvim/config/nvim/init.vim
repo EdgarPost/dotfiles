@@ -20,11 +20,15 @@ Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mbbill/undotree'
+Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-syntastic/syntastic'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Quramy/tsuquyomi'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug '2072/vim-syntax-for-PHP'
+Plug 'lumiliet/vim-twig'
 Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
@@ -87,7 +91,7 @@ noremap <leader>hh :Startify<CR>
 
 noremap <leader>nt :NERDTreeFocus<CR>
 noremap <leader>nc :NERDTreeClose<CR>
-noremap <leader>ns :NERDTreeFind<CR>
+noremap <leader>nl :NERDTreeFind<CR>
 
 noremap <leader>fo :FZF<CR>
 noremap <leader>fh :History<CR>
