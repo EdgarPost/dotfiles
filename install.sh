@@ -11,6 +11,7 @@ nvim +PlugInstall +UpdateRemotePlugins +qa
 
 # Tmux
 ln -fsv $pwd/tmux/tmux.conf $HOME/.tmux.conf
+ln -fsv $pwd/tmux/tmuxline $HOME/.tmuxline
 
 # Vim
 ln -fsv $pwd/vim/vimrc $HOME/.vimrc
