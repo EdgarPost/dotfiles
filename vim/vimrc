@@ -2,6 +2,7 @@ call plug#begin()
 
 " Syntax highlighting for many languages
 Plug 'sheerun/vim-polyglot'
+Plug 'jparise/vim-graphql'
 
 " Colorschemes
 Plug 'joshdick/onedark.vim'
@@ -22,6 +23,7 @@ Plug 'Galooshi/vim-import-js' " npm install -g import-js
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-unimpaired'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -40,6 +42,7 @@ set expandtab
 syntax enable
 set number
 set relativenumber
+set lazyredraw
 set cursorline
 set scroll=4
 set scrolloff=15
