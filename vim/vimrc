@@ -3,6 +3,7 @@ call plug#begin()
 " Syntax highlighting for many languages
 Plug 'sheerun/vim-polyglot'
 Plug 'jparise/vim-graphql'
+Plug 'posva/vim-vue'
 
 " Colorschemes
 Plug 'joshdick/onedark.vim'
@@ -27,6 +28,7 @@ Plug 'tpope/vim-unimpaired'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-fugitive'
 
 Plug 'sbdchd/neoformat'
 Plug 'w0rp/ale'
@@ -35,6 +37,8 @@ call plug#end()
 
 set encoding=utf-8
 scriptencoding utf-8
+set autoread
+set hidden
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
@@ -57,11 +61,14 @@ set hlsearch
 set ignorecase
 set smartcase
 set noshowmode
+set splitright
+set splitbelow
 
 if has('persistent_undo')
     set undofile 
     set undodir=~/.vim/undo
 endif
+
 
 :let mapleader = "\<space>"
 noremap ; :
@@ -89,8 +96,8 @@ let g:rg_command = '
 
 command! -bang -nargs=* RipGrep call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
+autocmd BufWritePre *.js silent ImportJSFix
 autocmd BufWritePre *.js silent Neoformat
-autocmd BufWritePost .vimrc source %
 
 " Abbreviations
 abbr teh the
