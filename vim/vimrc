@@ -9,23 +9,29 @@ Plug 'posva/vim-vue'
 Plug 'editorconfig/editorconfig-vim'
 
 " Colorschemes
-Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Plug 'edkolev/tmuxline.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'jiangmiao/auto-pairs'
 Plug 'farmergreg/vim-lastplace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
-Plug 'valloric/youcompleteme'
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+" Plug 'valloric/youcompleteme'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Galooshi/vim-import-js' " npm install -g import-js
 Plug 'ternjs/tern_for_vim'
+
+Plug 'stephpy/vim-php-cs-fixer'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -68,19 +74,22 @@ set smartcase
 set noshowmode
 set splitright
 set splitbelow
+set lazyredraw
+set ttyfast
 
 if has('persistent_undo')
     set undofile 
     set undodir=~/.vim/undo
 endif
 
+set directory=~/.vim/swap
+
 :let mapleader = "\<space>"
-noremap ; :
 
 " Close NERDTree and open vimrc
 noremap <leader>, :NERDTreeClose<CR>:e ~/.vimrc<CR>
 " Clear hightlight search
-noremap <leader>nh :nohlsearch<CR>
+noremap <leader><leader> :nohlsearch<CR>
 
 " nmap <leader>o :Files<CR>
 nmap <leader>o :GFiles<CR>
@@ -101,67 +110,27 @@ let g:rg_command = '
 
 command! -bang -nargs=* RipGrep call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
+augroup BufferWrite
+autocmd!
 " autocmd BufWritePre *.js silent ImportJSFix
-autocmd BufWritePre *.js silent Neoformat
+" autocmd BufWritePre *.js silent Neoformat
 autocmd BufWritePost .vimrc silent so %
+" autocmd BufWritePre *.php silent call PhpCsFixerFixFile()
+augroup END
 
-" Abbreviations
-abbr teh the
+" augroup Colors
+"     autocmd!
+"     autocmd Focus
+
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+" let g:deoplete#ignore_sources.php = ['omni']
 
 " Colors
 set background=dark
 colorscheme gruvbox
-" Make sure Lightline appear
+let g:airline_theme='zenburn'
 set laststatus=2
-
-" This is regular lightline configuration, we just added 
-" 'linter_warnings', 'linter_errors' and 'linter_ok' to
-" the active right panel. Feel free to move it anywhere.
-" `component_expand' and `component_type' are required.
-"
-" For more info on how this works, see lightline documentation.
-let g:lightline = {
-      \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'linter_warnings', 'linter_errors', 'linter_ok' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_expand': {
-      \   'linter_warnings': 'LightlineLinterWarnings',
-      \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK'
-      \ },
-      \ 'component_type': {
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error',
-      \   'linter_ok': 'ok'
-      \ },
-      \ }
-
-autocmd User ALELint call lightline#update()
-
-" ale + lightline
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d --', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d >>', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓' : ''
-endfunction
 
 " NERDTree configuration
 let NERDTreeShowHidden=1
@@ -170,4 +139,14 @@ let NERDTreeWinSize=60
 " ALE configuration
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['php'] = ['prettier']
 let g:ale_completion_enabled = 1
+
+" set statusline=%f%r
+" set statusline+=\ 
+" set statusline+=%y
+" set statusline+=%=
+" set statusline+=%l/%L
+" set statusline+=%{fugitive#statusline()}
+
+
