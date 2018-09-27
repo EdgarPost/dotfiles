@@ -1,17 +1,7 @@
 pwd=$(pwd)
 
-# Install Neovim
-dir=$HOME/.config/nvim
-echo $dir
-if ! [ -d file ] ; then
-    mkdir $dir
-fi
-ln -fsv $pwd/nvim/config/nvim/init.vim $dir/init.vim
-nvim +PlugInstall +UpdateRemotePlugins +qa
-
 # Tmux
 ln -fsv $pwd/tmux/tmux.conf $HOME/.tmux.conf
-ln -fsv $pwd/tmux/tmuxline $HOME/.tmuxline
 
 # Vim
 ln -fsv $pwd/vim/vimrc $HOME/.vimrc

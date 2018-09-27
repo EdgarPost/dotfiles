@@ -25,15 +25,9 @@ export JIRA_HOME=$HOME/jira
 alias vim="/usr/local/Cellar/vim/8.1.0100_2/bin/vim"
 
 # Project shortcuts
-alias sanskrit="/Users/edgarpost/Projects/mediamonks^mediamonks-sanskrit"
-alias airforce="/Users/edgarpost/Projects/gsd-m-airforce-com/deploy"
-alias kheera-npm="/Users/edgarpost/Projects/kheera"
-alias kheera-ui="/Users/edgarpost/Projects/kheera-ui"
-alias kheera-mock-project="/Users/edgarpost/Projects/kheera-mockproject"
-alias twitter-media="/Users/edgarpost/Projects/twitter-mediatwitter-com/source/adobe-experience-manager/src/maven/twitter-aem-modules/media-twitter-project/media-ui/src/main/webpack"
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
