@@ -1,0 +1,90 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "cmd+[",
+    "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "ctrl+-",
+    "command": "-workbench.action.navigateBack"
+  },
+  {
+    "key": "cmd+]",
+    "command": "workbench.action.navigateForward"
+  },
+  {
+    "key": "ctrl+shift+-",
+    "command": "-workbench.action.navigateForward"
+  },
+  {
+    "key": "cmd+up",
+    "command": "-cursorTop",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "cmd+down",
+    "command": "-cursorBottom",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "cmd+up",
+    "command": "editor.action.smartSelect.expand",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+cmd+right",
+    "command": "-editor.action.smartSelect.expand",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+down",
+    "command": "editor.action.smartSelect.shrink",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+cmd+left",
+    "command": "-editor.action.smartSelect.shrink",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+1",
+    "command": "workbench.files.action.showActiveFileInExplorer"
+  },
+  {
+    "key": "cmd+t",
+    "command": "workbench.action.terminal.focus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closePanel"
+  },
+  {
+    "key": "cmd+o",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+p",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "shift+cmd+p",
+    "command": "-workbench.action.showCommands"
+  },
+  {
+    "key": "shift+cmd+t",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "workbench.action.focusActiveEditorGroup"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "-cursorLineEnd",
+    "when": "textInputFocus"
+  }
+]

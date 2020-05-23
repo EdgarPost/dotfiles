@@ -1,0 +1,79 @@
+{
+  "editor.fontFamily": "'MonoLisa', 'Dank Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 12,
+  "editor.fontLigatures": true,
+  "files.autoSave": "onFocusChange",
+  "editor.folding": false,
+  "editor.renderIndentGuides": false,
+  "workbench.tips.enabled": false,
+  "workbench.tree.indent": 20,
+  "breadcrumbs.enabled": true,
+  "workbench.editor.showTabs": false,
+  "breadcrumbs.symbolPath": "off",
+  "editor.cursorStyle": "block",
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "none",
+  "workbench.activityBar.visible": false,
+  "merge-conflict.autoNavigateNextConflict.enabled": true,
+  "editor.snippetSuggestions": "none",
+  "window.openFilesInNewWindow": "on",
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "diffEditor.renderSideBySide": true,
+  "window.zoomLevel": 0,
+  "yaml.schemas": {
+    "file:///Users/edgar/.vscode/extensions/atlassian.atlascode-1.2.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.statusBar.visible": true,
+  "breadcrumbs.filePath": "off",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.blame.avatars": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "terminal.integrated.cursorBlinking": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "less.compile": {
+    "compress": true,
+    "out": "../css/"
+  },
+  "editor.formatOnSave": true,
+  "explorer.confirmDragAndDrop": false,
+  "[yaml]": {},
+  "problems.showCurrentInStatus": true,
+  "reason.path.bsb": "./node_modules/bs-platform/lib/bsb",
+  "editor.wordBasedSuggestions": false,
+  "css.validate": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "editor.tabSize": 2,
+  "prettier.requireConfig": true,
+  "editor.suggest.showWords": false,
+  "vim.cursorStylePerMode.insert": "underline",
+  "vim.leader": "<space>",
+  "vim.insertModeKeyBindings": [],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["<leader>", "o"],
+      "commands":["workbench.action.quickOpen"]
+    }
+  ]
+}
