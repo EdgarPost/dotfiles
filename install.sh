@@ -1,16 +1,17 @@
 # Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-# FZF
+# CLI
 brew install fzf
-
-# Node
 brew install node
 brew install yarn
+brew install httpie
+brew install thefuck
+brew install tmux
 
 # Applications
 brew cask install google-chrome
-brew cask install firefox-developer-edition
+brew cask install homebrew/cask-versions/firefox-developer-edition
 brew cask install visual-studio-code
 brew cask install docker
 brew cask install 1password
@@ -65,6 +66,9 @@ ln -fsv $PWD/nvim/init.vim $HOME/.config/nvim/init.vim
 # ZSH
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ln -fsv $PWD/zsh/zshrc $HOME/.zshrc
+
+# FZF
+$(brew --prefix)/opt/fzf/install
 
 # Git
 ln -fsv $PWD/git/gitconfig $HOME/.gitconfig
