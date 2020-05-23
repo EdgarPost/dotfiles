@@ -1,154 +1,204 @@
-set encoding=utf-8
-scriptencoding utf-8
+set nocompatible
+filetype off
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin()
 
-Plug 'wikitopian/hardmode'
-Plug 'christoomey/vim-tmux-navigator'
-"Plug 'easymotion/vim-easymotion'
-Plug 'mhinz/vim-startify'
-Plug 'altercation/vim-colors-solarized'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+" " Syntax highlighting for many languages
+Plug 'sheerun/vim-polyglot'
+
+" " Code formatting
 Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
+
+" " Colorschemes
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'mhinz/vim-startify'
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'farmergreg/vim-lastplace'
 Plug 'scrooloose/nerdtree'
-Plug 'mbbill/undotree'
-Plug 'majutsushi/tagbar'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'vim-syntastic/syntastic'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Quramy/tsuquyomi'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug '2072/vim-syntax-for-PHP'
-Plug 'lumiliet/vim-twig'
-Plug 'adoy/vim-php-refactoring-toolbox'
-Plug 'tobyS/vmustache'
-Plug 'tobyS/pdv'
-Plug 'stephpy/vim-php-cs-fixer'
-Plug 'sbdchd/neoformat'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'EdgarPost/vim-gutentags'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+
+" Plug 'w0rp/ale'
+" Plug 'Galooshi/vim-import-js'
+" Plug 'janko-m/vim-test'
 
 call plug#end()
 
-let g:startify_custom_header = ['']
-let g:startify_session_dir = '~/.config/nvim/session'
-let g:startify_change_to_dir = 0
-let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'} ]
-let g:startify_list_order = [
-            \ ['   Recent files'],
-            \ 'dir',
-            \ ['   Sessions'],
-            \ 'sessions',
-            \ ['   Bookmarks:'],
-            \ 'bookmarks',
-            \ ['   Commands:'],
-            \ 'commands',
-            \ ]
-
-" General config
+set encoding=utf8
+scriptencoding utf8
+set autoread
+set hidden
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
 syntax enable
-:let mapleader = "\<space>"
-set background=dark
-colorscheme solarized
-"set lazyredraw
 set number
 set relativenumber
 set cursorline
-"set cursorcolumn
-set scrolloff=10
-set tabstop=4
-set shiftwidth=4
+set scrolloff=15
 set softtabstop=4
-set expandtab
 set backspace=indent,eol,start
+set autoindent
 set nowrap
-set colorcolumn=120
+set showmatch
+set colorcolumn=100
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
-
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-noremap ; :
-" Open NeoVim settings macOS style (<leader> + ,)
-noremap <leader>, :tabnew ~/.config/nvim/init.vim<CR>
-" noremap <leader>,r :so ~/.config/nvim/init.vim<CR>
-
-noremap <leader>hh :Startify<CR>
-
-noremap <leader>nt :NERDTreeFocus<CR>
-noremap <leader>nc :NERDTreeClose<CR>
-noremap <leader>nl :NERDTreeFind<CR>
-
-noremap <leader>fo :FZF<CR>
-noremap <leader>fh :History<CR>
-noremap <leader>fu :UndotreeToggle<CR>
-
-noremap <leader>tt :tabnew<CR>
-noremap <leader>tn :tabNext<CR>
-
-tnoremap <Leader><Leader> <C-\><C-n>
-:au BufEnter * if &buftype == 'terminal' | :startinsert | endif
- 
-set splitbelow
+set noshowmode
 set splitright
+set splitbelow
+set lazyredraw
+set ttyfast
 
-"autocmd BufWritePre * Neoformat
-
-let g:neoformat_php_php_cs_fixer = {
-           \ 'exe': 'php-cs-fixer',
-           \ 'args': ['fix', '-q', '--rules=@Symfony'],
-           \ 'replace': 1,
-           \ }
-
-let g:neoformat_enabled_php = ['php_cs_fixer']
-
-let g:airline_solarized_bg='dark'
-let g:airline_theme='solarized'
-let g:airline_powerline_fonts = 1
-
-let g:gutentags_cache_dir = '~/.config/nvim/gutentags'
-let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
-                            \ '*.phar', '*.ini', '*.rst', '*.md',
-                            \ '*vendor/*/test*', '*vendor/*/Test*',
-                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
-                            \ '*var/cache*', '*var/log*']
-
-" Deoplete config
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
- 
-let g:pdv_template_dir = $HOME ."/.config/nvim/plugged/pdv/templates_snip"
-
-let g:tsuquyomi_tsserver_path = './tools/build/node_modules/typescript/bin/tsserver'
-
-" Persist until infinity
-if has("persistent_undo")
-    set undodir=~/.undodir/
-    set undofile
+if has('persistent_undo')
+    set undofile 
+    set undodir=~/.vim/undo
 endif
 
-" Syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
- 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+set directory=~/.vim/swap
 
+:let mapleader = "\<space>"
+
+" Close NERDTree and open vimrc
+noremap <leader>, :NERDTreeClose<CR>:e ~/.config/nvim/init.vim<CR>
+" Clear hightlight search
+noremap <leader><leader> :nohlsearch<CR>
+
+nmap <leader>a :Commands<CR>
+nmap <leader>o :GFiles<CR>
+nmap <leader>f :Ag<CR>
+nmap <leader>e :History<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>t :NERDTreeVCS<CR>
+
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+augroup BufferWrite
+autocmd!
+autocmd BufWritePost ~/.config/nvim/init.vim silent so %
+augroup END
+
+" " Colors
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:gruvbox_italic=1
+colorscheme gruvbox
+
+" NERDTree configuration
+let NERDTreeShowHidden=1
+let NERDTreeWinSize=60
+let NERDTreeQuitOnOpen=1
+let g:NERDTreeNodeDelimiter = "\u00a0"
+let g:NERDTreeGitStatusWithFlags = 1
+
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction<Paste>
+
+
+" Startify
+let g:startify_change_to_dir = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_lists = [
+          \ { 'type': 'dir',       'header': ['   ' . getcwd()] },
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': 'commands',  'header': ['   Commands']       },
+          \ ]
+
+" ======= coc settings
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ ]
+
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" instead of having ~/.vim/coc-settings.json
+let s:LSP_CONFIG = {
+\  'flow': {
+\    'command': exepath('flow'),
+\    'args': ['lsp'],
+\    'filetypes': ['javascript', 'javascriptreact'],
+\    'initializationOptions': {},
+\    'requireRootPattern': 1,
+\    'settings': {},
+\    'rootPatterns': ['.flowconfig']
+\  }
+\}
+
+let s:languageservers = {}
+for [lsp, config] in items(s:LSP_CONFIG)
+  let s:not_empty_cmd = !empty(get(config, 'command'))
+  if s:not_empty_cmd | let s:languageservers[lsp] = config | endif
+endfor
+
+if !empty(s:languageservers)
+  call coc#config('languageserver', s:languageservers)
+  endif
