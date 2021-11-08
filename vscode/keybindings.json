@@ -51,7 +51,7 @@
     "command": "workbench.files.action.showActiveFileInExplorer"
   },
   {
-    "key": "cmd+t",
+    "key": "cmd+k t",
     "command": "workbench.action.terminal.focus"
   },
   {

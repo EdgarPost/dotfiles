@@ -1,9 +1,6 @@
 {
-  "editor.fontFamily": "'MonoLisa', 'Dank Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
-  "files.autoSave": "onFocusChange",
-  "editor.folding": false,
   "editor.renderIndentGuides": false,
   "workbench.tips.enabled": false,
   "workbench.tree.indent": 20,
@@ -15,11 +12,9 @@
   "workbench.startupEditor": "none",
   "workbench.activityBar.visible": false,
   "merge-conflict.autoNavigateNextConflict.enabled": true,
-  "editor.snippetSuggestions": "none",
   "window.openFilesInNewWindow": "on",
   "javascript.updateImportsOnFileMove.enabled": "never",
   "diffEditor.renderSideBySide": true,
-  "window.zoomLevel": 0,
   "yaml.schemas": {
     "file:///Users/edgar/.vscode/extensions/atlassian.atlascode-1.2.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
@@ -43,37 +38,42 @@
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "less.compile": {
     "compress": true,
     "out": "../css/"
   },
-  "editor.formatOnSave": true,
   "explorer.confirmDragAndDrop": false,
   "[yaml]": {},
   "problems.showCurrentInStatus": true,
-  "reason.path.bsb": "./node_modules/bs-platform/lib/bsb",
   "editor.wordBasedSuggestions": false,
   "css.validate": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "workbench.colorTheme": "Gruvbox Dark Medium",
-  "typescript.validate.enable": false,
+  "workbench.colorTheme": "Verdandi",
   "javascript.validate.enable": false,
   "editor.tabSize": 2,
   "prettier.requireConfig": true,
   "editor.suggest.showWords": false,
-  "vim.cursorStylePerMode.insert": "underline",
-  "vim.leader": "<space>",
-  "vim.insertModeKeyBindings": [],
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<leader>", "<leader>"],
-      "commands": [":nohl"]
-    },
-    {
-      "before": ["<leader>", "o"],
-      "commands":["workbench.action.quickOpen"]
-    }
-  ]
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
+  "window.openFoldersInNewWindow": "off",
+  "editor.tabCompletion": "onlySnippets",
+  "files.associations": {
+    "*.ts": "typescript"
+  },
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "javascript"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "editor.fontFamily": "'MonoLisa', 'Dank Mono', Menlo, Monaco, 'Courier New', monospace",
+  "files.autoSaveDelay": 5000,
+  "terminal.integrated.scrollback": 10000,
+  "auto-rename-tag.activationOnLanguage": [
+    "*"
+  ],
+  "redhat.telemetry.enabled": false,
+  "editor.formatOnSave": true,
+  "typescript.tsserver.log": "verbose"
 }

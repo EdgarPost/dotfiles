@@ -1,6 +1,6 @@
 [user]
 	name = Edgar Post
-	email = edgar@passionatepeople.io
+	email = epost@anwb.nl
 [core]
 	autocrlf = input
 	ignorecase = false
@@ -28,7 +28,14 @@
 	ps = push
 	lt = describe --abbrev=0 --tags
 	h = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' 
-	ha = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    ha = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --branches=feature/* --all
 	fs = flow feature start
 	ff = flow feature finish
 
+; [fetch]
+; 	prune = true
+; 	pruneTags = true
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

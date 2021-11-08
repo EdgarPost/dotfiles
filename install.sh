@@ -8,6 +8,7 @@ brew install yarn
 brew install httpie
 brew install thefuck
 brew install tmux
+brew install the_silver_searcher # AG
 
 # Applications
 brew cask install google-chrome
@@ -15,6 +16,7 @@ brew cask install homebrew/cask-versions/firefox-developer-edition
 brew cask install visual-studio-code
 brew cask install docker
 brew cask install 1password
+brew cask install postman
 brew cask install alfred
 brew cask install slack
 brew cask install microsoft-teams
@@ -22,6 +24,8 @@ brew cask install notion
 brew cask install discord
 brew cask install zoomus
 brew cask install iterm2
+brew cask install toggl
+brew cask install nordvpn
 
 # Visual Code settings
 mkdir -p $HOME/Library/Application\ Support/Code/User
