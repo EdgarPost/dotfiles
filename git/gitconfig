@@ -1,6 +1,6 @@
 [user]
 	name = Edgar Post
-	email = epost@anwb.nl
+	email = 
 [core]
 	autocrlf = input
 	ignorecase = false
@@ -39,3 +39,5 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[rerere]
+	enabled = true
