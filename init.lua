@@ -1,0 +1,1 @@
+/Users/edgarpost/Projects/Personal/dotfiles/nvim/init.lua
