@@ -12,9 +12,12 @@ brew install tmuxinator
 brew install ranger
 brew install nvim
 brew install the_silver_searcher # AG
+brew install ripgrep
+brew install fd
 
 # Applications
 brew install google-chrome
+brew install amethyst
 brew install homebrew/cask-versions/firefox-developer-edition
 brew install docker
 brew install 1password

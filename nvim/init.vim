@@ -15,6 +15,9 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
@@ -22,14 +25,23 @@ Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'farmergreg/vim-lastplace'
 Plug 'scrooloose/nerdtree'
-Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'lambdalisue/fern.vim'
 
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-unimpaired'
+
+" Git stuff
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Zettelkasten
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'renerocksai/calendar-vim'
+Plug 'renerocksai/telekasten.nvim'
 
 call plug#end()
 
@@ -76,12 +88,40 @@ noremap <leader>, :NERDTreeClose<CR>:e ~/.config/nvim/init.vim<CR>
 " Clear hightlight search
 noremap <leader><leader> :nohlsearch<CR>
 
-nmap <leader>a :Commands<CR>
-nmap <leader>o :GFiles<CR>
-nmap <leader>f :Ag<CR>
+nnoremap <leader>a <cmd>Telescope commands<cr>
+nnoremap <leader>o <cmd>Telescope find_files<cr>
+nnoremap <leader>f <cmd>Telescope live_grep<cr>
 nmap <leader>e :History<CR>
 nmap <leader>b :Buffers<CR>
-nmap <leader>t :NERDTreeVCS<CR>
+nmap <leader>t :Fern . -reveal=%<CR>
+nmap <leader>s :CocList -I symbols<CR>
+
+" Clipboard
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+nnoremap <leader>Y gg"+yG
+
+" Move lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <leader>g :Git<CR>
+nnoremap <leader>gb <cmd>Telescope git_branches<cr>
+nnoremap <leader>gc <cmd>Telescope git_bcommits<cr>
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
 " Use HJKL instead!
 noremap <Up> <Nop>
@@ -97,21 +137,17 @@ autocmd!
 autocmd BufWritePost ~/.config/nvim/init.vim silent so %
 augroup END
 
-" " Colors
+" Colors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
+set background=dark
 
 " NERDTree configuration
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=60
-let NERDTreeQuitOnOpen=1
 let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeGitStatusWithFlags = 1
-
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction<Paste>
 
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
@@ -131,7 +167,7 @@ set nowritebackup
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -165,20 +201,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
@@ -203,16 +225,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.

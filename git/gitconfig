@@ -1,6 +1,6 @@
 [user]
 	name = Edgar Post
-	email = 
+	email =
 [core]
 	autocrlf = input
 	ignorecase = false
