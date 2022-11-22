@@ -26,12 +26,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'farmergreg/vim-lastplace'
 Plug 'scrooloose/nerdtree'
 Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-git-status.vim'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-dotenv'
 
 " Git stuff
 Plug 'tpope/vim-fugitive'
@@ -89,9 +91,10 @@ noremap <leader>, :NERDTreeClose<CR>:e ~/.config/nvim/init.vim<CR>
 noremap <leader><leader> :nohlsearch<CR>
 
 nnoremap <leader>a <cmd>Telescope commands<cr>
+" nnoremap <leader>o <cmd>Telescope git_files<cr>
 nnoremap <leader>o <cmd>Telescope find_files<cr>
 nnoremap <leader>f <cmd>Telescope live_grep<cr>
-nmap <leader>e :History<CR>
+nnoremap <leader>e <cmd>Telescope oldfiles<cr>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :Fern . -reveal=%<CR>
 nmap <leader>s :CocList -I symbols<CR>
@@ -116,7 +119,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nnoremap <leader>g :Git<CR>
+nnoremap <leader>gg :Git<CR>
 nnoremap <leader>gb <cmd>Telescope git_branches<cr>
 nnoremap <leader>gc <cmd>Telescope git_bcommits<cr>
 
@@ -131,6 +134,8 @@ noremap <Left> <Nop>
 
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+vnoremap <silent>yc "*y<esc>
 
 augroup BufferWrite
 autocmd!
@@ -154,9 +159,9 @@ inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 " Startify
 let g:startify_change_to_dir = 1
 let g:startify_change_to_vcs_root = 1
+let g:startify_use_env = 1
 let g:startify_lists = [
           \ { 'type': 'dir',       'header': ['   ' . getcwd()] },
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
           \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
           \ { 'type': 'commands',  'header': ['   Commands']       },
           \ ]

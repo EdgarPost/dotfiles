@@ -4,6 +4,8 @@
 # CLI
 brew install fzf
 brew install node
+brew install nvm
+brew install bash
 brew install yarn
 brew install httpie
 brew install thefuck
@@ -46,6 +48,11 @@ ln -fsv $PWD/nvim/init.lua $HOME/.config/nvim/lua/init.lua
 # ZSH
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ln -fsv $PWD/zsh/zshrc $HOME/.zshrc
+
+# ZSH - autocomplete
+mkdir -p $PWD/zsh/plugins 
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $PWD/zsh/plugins/zsh-autocomplete
+ln -fsv $PWD/zsh/plugins $HOME/.zsh_plugins
 
 # FZF
 $(brew --prefix)/opt/fzf/install
