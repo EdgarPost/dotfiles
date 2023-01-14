@@ -1,38 +1,35 @@
-# Brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
 # CLI
-brew install fzf
-brew install node
-brew install nvm
-brew install bash
-brew install yarn
-brew install httpie
-brew install thefuck
-brew install tmux
-brew install tmuxinator
-brew install ranger
-brew install nvim
-brew install the_silver_searcher # AG
-brew install ripgrep
-brew install fd
+apt-get install fzf
+apt-get install node
+apt-get install nvm
+apt-get install bash
+apt-get install yarn
+apt-get install httpie
+apt-get install thefuck
+apt-get install tmux
+apt-get install tmuxinator
+apt-get install ranger
+apt-get install nvim
+apt-get install the_silver_searcher # AG
+apt-get install ripgrep
+apt-get install fd
 
 # Applications
-brew install google-chrome
-brew install amethyst
-brew install homebrew/cask-versions/firefox-developer-edition
-brew install docker
-brew install 1password
-brew install postman
-brew install raycast
-brew install slack
-brew install microsoft-teams
-brew install notion
-brew install discord
-brew install zoomus
-brew install iterm2
-brew install toggl
-brew install nordvpn
+apt-get install google-chrome
+apt-get install amethyst
+apt-get install firefox
+apt-get install docker
+apt-get install 1password
+apt-get install postman
+apt-get install raycast
+apt-get install slack
+apt-get install microsoft-teams
+apt-get install notion
+apt-get install discord
+apt-get install zoomus
+apt-get install iterm2
+apt-get install toggl
+apt-get install nordvpn
 
 # Tmux
 ln -fsv $PWD/tmux/tmux.conf $HOME/.tmux.conf
@@ -55,7 +52,7 @@ git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $PW
 ln -fsv $PWD/zsh/plugins $HOME/.zsh_plugins
 
 # FZF
-$(brew --prefix)/opt/fzf/install
+$(apt-get --prefix)/opt/fzf/install
 
 # Git
 ln -fsv $PWD/git/gitconfig $HOME/.gitconfig

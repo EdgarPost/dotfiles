@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Projects ~/Obsidian -type d -name ".git" -maxdepth 4 | sed 's/\.git//' | fzf)
+    selected=$(find ~/Projects ~/Documents/import/Obsidian -type d -name ".git" -maxdepth 4 | sed 's/\.git//' | fzf)
 fi
 
 if [[ -z $selected ]]; then

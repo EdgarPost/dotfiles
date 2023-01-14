@@ -1,6 +1,10 @@
 set nocompatible
 filetype off
 
+lua <<EOF
+require('init')
+EOF
+
 call plug#begin()
 
 " " Syntax highlighting for many languages
@@ -20,13 +24,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'mhinz/vim-startify'
+Plug 'goolord/alpha-nvim'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'farmergreg/vim-lastplace'
-Plug 'scrooloose/nerdtree'
-Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/fern-git-status.vim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
@@ -38,6 +42,7 @@ Plug 'tpope/vim-dotenv'
 " Git stuff
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'f-person/git-blame.nvim'
 
 " Zettelkasten
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
@@ -47,90 +52,93 @@ Plug 'renerocksai/telekasten.nvim'
 
 call plug#end()
 
-set encoding=utf8
-scriptencoding utf8
-set autoread
-set hidden
-filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set expandtab
-syntax enable
-set number
-set relativenumber
-set cursorline
-set scrolloff=15
-set softtabstop=4
-set backspace=indent,eol,start
-set autoindent
-set nowrap
-set showmatch
-set colorcolumn=100
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-set noshowmode
-set splitright
-set splitbelow
-set lazyredraw
-set ttyfast
+" set encoding=utf8
+" scriptencoding utf8
+" set autoread
+" set hidden
+" filetype plugin indent on
+" set tabstop=4
+" set shiftwidth=4
+" set expandtab
+" syntax enable
+" set number
+" set relativenumber
+" set cursorline
+" set scrolloff=50
+" set softtabstop=4
+" set backspace=indent,eol,start
+" set autoindent
+" set nowrap
+" set showmatch
+" set colorcolumn=100
+" set mouse=a
+" set incsearch
+" set hlsearch
+" set ignorecase
+" set smartcase
+" set noshowmode
+" set splitright
+" set splitbelow
+" set lazyredraw
+" set ttyfast
 
-if has('persistent_undo')
-    set undofile 
-    set undodir=~/.vim/undo
-endif
+" if has('persistent_undo')
+"     set undofile 
+"     set undodir=~/.vim/undo
+" endif
 
-set directory=~/.vim/swap
+" set directory=~/.vim/swap
 
 :let mapleader = "\<space>"
 
-" Close NERDTree and open vimrc
-noremap <leader>, :NERDTreeClose<CR>:e ~/.config/nvim/init.vim<CR>
+" Open preferences
+" noremap <leader>, :e ~/.config/nvim/init.vim<CR>
 " Clear hightlight search
-noremap <leader><leader> :nohlsearch<CR>
+" noremap <leader><leader> :nohlsearch<CR>
 
-nnoremap <leader>a <cmd>Telescope commands<cr>
+" nnoremap <leader>a <cmd>Telescope commands<cr>
 " nnoremap <leader>o <cmd>Telescope git_files<cr>
-nnoremap <leader>o <cmd>Telescope find_files<cr>
-nnoremap <leader>f <cmd>Telescope live_grep<cr>
-nnoremap <leader>e <cmd>Telescope oldfiles<cr>
-nmap <leader>b :Buffers<CR>
-nmap <leader>t :Fern . -reveal=%<CR>
-nmap <leader>s :CocList -I symbols<CR>
+" nnoremap <leader>o <cmd>Telescope find_files<cr>
+" nnoremap <leader>f <cmd>Telescope live_grep<cr>
+" nnoremap <leader>e <cmd>Telescope oldfiles<cr>
+" nmap <leader>b :Buffers<CR>
+" nmap <leader>t :Neotree toggle reveal<CR>
+" nmap <leader>s :CocList -I symbols<CR>
 
 " Clipboard
-vnoremap <leader>y "+y
-nnoremap <leader>y "+y
-nnoremap <leader>Y gg"+yG
+" vnoremap <leader>y "+y
+" nnoremap <leader>y "+y
+" nnoremap <leader>Y gg"+yG
 
 " Move lines
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+" vnoremap J :m '>+1<CR>gv=gv
+" vnoremap K :m '<-2<CR>gv=gv
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 
-nnoremap <leader>gg :Git<CR>
-nnoremap <leader>gb <cmd>Telescope git_branches<cr>
-nnoremap <leader>gc <cmd>Telescope git_bcommits<cr>
+" nnoremap <leader>gg :Git<CR>
+" nnoremap <leader>gb <cmd>Telescope git_branches<cr>
+" nnoremap <leader>gc <cmd>Telescope git_bcommits<cr>
+" nnoremap <leader>gbl <cmd>GitBlameToggle<cr>
+" let g:gitblame_enabled = 0
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
+" nnoremap <silent> K :call ShowDocumentation()<CR>
 
 " Use HJKL instead!
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Right> <Nop>
-noremap <Left> <Nop>
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
+" noremap <Right> <Nop>
+" noremap <Left> <Nop>
 
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -143,28 +151,25 @@ autocmd BufWritePost ~/.config/nvim/init.vim silent so %
 augroup END
 
 " Colors
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:gruvbox_italic=1
-colorscheme gruvbox
-set background=dark
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let g:gruvbox_italic=1
+" colorscheme gruvbox
+" set background=dark
+" highlight Normal ctermbg=none guibg=none
+" highlight NonText ctermbg=none guibg=none
+" highlight EndOfBuffer ctermfg=black ctermbg=black
 
-" NERDTree configuration
-let NERDTreeShowHidden=1
-let NERDTreeWinSize=60
-let g:NERDTreeNodeDelimiter = "\u00a0"
-let g:NERDTreeGitStatusWithFlags = 1
+" inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
-" Startify
-let g:startify_change_to_dir = 1
-let g:startify_change_to_vcs_root = 1
-let g:startify_use_env = 1
-let g:startify_lists = [
-          \ { 'type': 'dir',       'header': ['   ' . getcwd()] },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ { 'type': 'commands',  'header': ['   Commands']       },
-          \ ]
+" " Startify
+" let g:startify_change_to_dir = 1
+" let g:startify_change_to_vcs_root = 1
+" let g:startify_use_env = 1
+" let g:startify_lists = [
+"           \ { 'type': 'dir',       'header': ['   ' . getcwd()] },
+"           \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+"           \ { 'type': 'commands',  'header': ['   Commands']       },
+"           \ ]
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -172,27 +177,27 @@ set nowritebackup
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=100
+" set updatetime=100
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-set signcolumn=yes
+" set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
 " no select by `"suggest.noselect": true` in your configuration file.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -244,11 +249,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
